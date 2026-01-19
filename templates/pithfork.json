@@ -1,0 +1,83 @@
+{
+	"schemaVersion": "0.1.0",
+	"name": "Pitchfork",
+	"behavior": "create",
+	"noteContentFormat": "# Pitchfork\n{{selector:div[data-testid=\"BodyWrapper\"] .body__inner-container > p|join:'\\n\\n'}}",
+	"properties": [
+		{
+			"name": "author",
+			"value": "{{selector:a[href^=\\\"/artists/\\\"] div|unique|wikilink|join}}",
+			"type": "multitext"
+		},
+		{
+			"name": "type",
+			"value": "{{selector:span[class*=\\\"RubricName\\\"]|first|trim|wikilink}}",
+			"type": "multitext"
+		},
+		{
+			"name": "title",
+			"value": "{{selector:[data-testid=\\\"ContentHeaderHed\\\"]|unique}}",
+			"type": "text"
+		},
+		{
+			"name": "year",
+			"value": "{{selector:[data-testid=\\\"SplitScreenContentHeaderReleaseYear\\\"]|unique}}",
+			"type": "number"
+		},
+		{
+			"name": "cover",
+			"value": "{{selector:img[data-src]?data-src|first}}",
+			"type": "text"
+		},
+		{
+			"name": "genre",
+			"value": "{{selector:p[class*=\\\"InfoSliceValue\\\"]|first|replace:' / ':'/'|replace:'/','-'|trim|wikilink}}",
+			"type": "multitext"
+		},
+		{
+			"name": "label",
+			"value": "{{selector:li[class*=\\\"InfoSliceListItem\\\"]:nth-of-type(2) p[class*=\\\"InfoSliceValue\\\"]|first|trim|wikilink}}",
+			"type": "multitext"
+		},
+		{
+			"name": "reviewed",
+			"value": "{{selector:li[class*=\\\"InfoSliceListItem\\\"]:nth-of-type(3) p[class*=\\\"InfoSliceValue\\\"]|first|trim}}",
+			"type": "text"
+		},
+		{
+			"name": "source",
+			"value": "{{url}}",
+			"type": "text"
+		},
+		{
+			"name": "tags",
+			"value": "music/album",
+			"type": "multitext"
+		},
+		{
+			"name": "created",
+			"value": "{{date}}",
+			"type": "date"
+		},
+		{
+			"name": "contributor",
+			"value": "{{selector:a[class*=\\\"BylineLink\\\"]|unique|trim|wikilink|join:', '}}",
+			"type": "multitext"
+		},
+		{
+			"name": "pitchfork-assessment",
+			"value": "{{selector:p[class*=\\\"Rating\\\"]|first|trim}}",
+			"type": "number"
+		},
+		{
+			"name": "rating",
+			"value": "",
+			"type": "number"
+		}
+	],
+	"triggers": [
+		"https://pitchfork.com/reviews/albums/"
+	],
+	"noteNameFormat": "{{selector:[data-testid=\"ContentHeaderHed\"]|first|trim}} (Album by {{selector:a[href^=\"/artists/\"]|unique|trim|join:', '}})",
+	"path": "Inbox"
+}
